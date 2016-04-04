@@ -24,9 +24,9 @@ START_NAMESPACE_DISTRHO
 // -----------------------------------------------------------------------
 
 Plugin{{ cookiecutter.plugin_name }}::Plugin{{ cookiecutter.plugin_name }}()
-    : Plugin(paramCount, 1, 0),  // paramCount params, 1 program(s), 0 states
-      fSampleRate(getSampleRate())
+    : Plugin(paramCount, 1, 0)  // paramCount params, 1 program(s), 0 states
 {
+    sampleRateChanged(getSampleRate());
     loadProgram(0);
 }
 
@@ -66,6 +66,13 @@ void Plugin{{ cookiecutter.plugin_name }}::initProgramName(uint32_t index, Strin
 
 // -----------------------------------------------------------------------
 // Internal data
+
+/**
+  Optional callback to inform the plugin about a sample rate change.
+*/
+void Plugin{{ cookiecutter.plugin_name }}::sampleRateChanged(double newSampleRate) {
+    fSampleRate = newSampleRate;
+}
 
 /**
   Get the current value of a parameter.

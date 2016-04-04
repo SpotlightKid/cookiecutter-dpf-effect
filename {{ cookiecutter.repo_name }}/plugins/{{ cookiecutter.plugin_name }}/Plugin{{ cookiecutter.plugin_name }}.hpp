@@ -84,6 +84,12 @@ protected:
     void loadProgram(uint32_t index) override;
 
     // -------------------------------------------------------------------
+    // Optional
+
+    // Optional callback to inform the plugin about a sample rate change.
+    void sampleRateChanged(double newSampleRate) override;
+
+    // -------------------------------------------------------------------
     // Process
 
     void activate() override;
