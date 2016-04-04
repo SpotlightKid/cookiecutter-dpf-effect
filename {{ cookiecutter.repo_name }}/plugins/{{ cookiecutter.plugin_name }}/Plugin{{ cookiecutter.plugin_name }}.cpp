@@ -48,8 +48,6 @@ void Plugin{{ cookiecutter.plugin_name }}::initParameter(uint32_t index, Paramet
             parameter.symbol = "volume";
             break;
     }
-
-    parameter.symbol = parameter.name;
 }
 
 /**
