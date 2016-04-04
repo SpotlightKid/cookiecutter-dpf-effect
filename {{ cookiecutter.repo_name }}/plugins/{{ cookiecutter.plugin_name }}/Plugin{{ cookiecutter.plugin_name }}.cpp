@@ -24,7 +24,7 @@ START_NAMESPACE_DISTRHO
 // -----------------------------------------------------------------------
 
 Plugin{{ cookiecutter.plugin_name }}::Plugin{{ cookiecutter.plugin_name }}()
-    : Plugin(paramCount, 1, 0),  // paramtCount params, 1 program(s), 0 states
+    : Plugin(paramCount, 1, 0),  // paramCount params, 1 program(s), 0 states
       fSampleRate(getSampleRate())
 {
     loadProgram(0);
