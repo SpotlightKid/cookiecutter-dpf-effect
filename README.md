@@ -30,6 +30,7 @@ Requirements
 ------------
 
 * Basic development tools (C++ compiler, make, etc.)
+* Python
 * Git
 * [cookiecutter]
 
