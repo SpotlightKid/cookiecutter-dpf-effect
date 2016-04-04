@@ -24,7 +24,7 @@ include ../Makefile.mk
 # Enable all possible plugin types
 
 ifeq ($(LINUX),true)
-TARGETS += dssi
+TARGETS += dssi ladspa
 endif
 
 TARGETS += lv2_dsp
