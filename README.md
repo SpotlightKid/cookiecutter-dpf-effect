@@ -9,7 +9,8 @@ the [installation instructions]) and then run:
 
     cookiecutter https://github.com/SpotlightKid/cookiecutter-dpf-effect
 
-and enter the plugin name and other info at the prompts.
+and enter the plugin name and other info at the prompts. See the
+[cookiecutter documentation] on how to change the default values for these prompts.
 
 A directory named after the value you gave for `repo_name` will be created
 and initialized as a git repository and DPF added as a git submodule.
@@ -36,5 +37,6 @@ Requirements
 
 
 [cookiecutter]: https://github.com/audreyr/cookiecutter
+[cookiecutter documentation]: https://cookiecutter.readthedocs.io/en/0.9.1/advanced_usage.html#user-config-0-7-0
 [DPF]: https://github.com/DISTRHO/DPF
 [installation instructions]: http://cookiecutter.readthedocs.org/en/latest/installation.html
