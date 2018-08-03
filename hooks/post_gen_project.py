@@ -11,7 +11,7 @@ submodule = "dpf"
 submodule_url = "git://github.com/DISTRHO/DPF.git"
 git_url = "git@github.com:{{ cookiecutter.github_username }}/{{ cookiecutter.repo_name }}"
 
-print("Running post-project-generation hook...")
+print("\nRunning post-project-generation hook...\n")
 
 print("Initializing new Git repository:")
 call(['git', 'init'])
