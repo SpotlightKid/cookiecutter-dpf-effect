@@ -80,7 +80,7 @@ much faster, because the DPF library has already been built.
 Requirements
 ------------
 
-* Basic development tools (C++ compiler, make, etc.)
+* Basic development tools (C++ compiler, make, pkg-config, etc.)
 * Python
 * Git
 * [cookiecutter]
