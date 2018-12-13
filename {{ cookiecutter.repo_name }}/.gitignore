@@ -12,6 +12,9 @@
 .kdev4/
 .DS_Store
 
-bin/*-dssi/
-bin/*.lv2/
-bin/d_*
+bin/{{ cookiecutter.plugin_name | lower }}
+bin/{{ cookiecutter.plugin_name | lower }}.exe
+bin/{{ cookiecutter.plugin_name | lower }}-ladspa.*
+bin/{{ cookiecutter.plugin_name | lower }}-dssi.*
+bin/{{ cookiecutter.plugin_name | lower }}-vst.*
+bin/{{ cookiecutter.plugin_name | lower }}.lv2/
