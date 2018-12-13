@@ -18,7 +18,7 @@ Here is an example:
     $ cookiecutter https://github.com/SpotlightKid/cookiecutter-dpf-effect
     project_name [Simple Gain]:
     plugin_description [A simple audio volume gain plugin]:
-    full_name [Joe Doe]: Christopher Arndt
+    author_name [Joe Doe]: Christopher Arndt
     domain [example.com]: chrisarndt.de
     github_username [christopher.arndt]: SpotlightKid
     email [SpotlightKid@chrisarndt.de]: info@chrisarndt.de
