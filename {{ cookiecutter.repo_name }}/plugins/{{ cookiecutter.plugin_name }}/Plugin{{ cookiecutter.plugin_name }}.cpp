@@ -1,5 +1,5 @@
 /*
- * {{ cookiecutter.project_name }} audio efffect based on DISTRHO Plugin Framework (DPF)
+ * {{ cookiecutter.project_name }} audio effect based on DISTRHO Plugin Framework (DPF)
  * Copyright (C) {{ cookiecutter.year }} {{ cookiecutter.author_name }} <{{ cookiecutter.email }}>
  *
  * Permission to use, copy, modify, and/or distribute this software for any
