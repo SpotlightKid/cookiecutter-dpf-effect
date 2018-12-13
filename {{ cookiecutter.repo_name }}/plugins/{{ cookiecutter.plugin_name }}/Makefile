@@ -12,22 +12,23 @@ NAME = {{ cookiecutter.plugin_name | lower }}
 # --------------------------------------------------------------
 # Files to build
 
-OBJS_DSP = \
-	Plugin{{ cookiecutter.plugin_name }}.cpp.o
+FILES_DSP = \
+	Plugin{{ cookiecutter.plugin_name }}.cpp
 
 # --------------------------------------------------------------
 # Do some magic
 
-include ../Makefile.mk
+include ../../dpf/Makefile.plugins.mk
 
 # --------------------------------------------------------------
 # Enable all possible plugin types
 
-ifeq ($(LINUX),true)
-TARGETS += dssi ladspa
+ifeq ($(HAVE_JACK),true)
+TARGETS += jack
 endif
 
-TARGETS += lv2_dsp
+TARGETS += dssi_dsp
+TARGETS += lv2_sep
 TARGETS += vst
 
 all: $(TARGETS)
