@@ -6,11 +6,31 @@
 
 include dpf/Makefile.base.mk
 
-all: plugins gen
+all: libs plugins gen
 
 # --------------------------------------------------------------
 
-plugins:
+define MISSING_SUBMODULES_ERROR
+
+Could not find DPF. Please run "make submodules" to clone the missing submodules.
+
+endef
+
+# --------------------------------------------------------------
+
+submodules: 
+	git submodule update --init --recursive
+
+libs:
+ifeq (,$(wildcard dpf/dgl))
+	$(error $(MISSING_SUBMODULES_ERROR))
+{%- if cookiecutter.has_ui %}
+else
+	$(MAKE) -C dpf/dgl
+{%- endif %}
+endif
+
+plugins: libs
 	$(MAKE) all -C plugins/{{ cookiecutter.plugin_name }}
 
 ifneq ($(CROSS_COMPILING),true)
@@ -29,6 +49,9 @@ endif
 # --------------------------------------------------------------
 
 clean:
+{%- if cookiecutter.has_ui %}
+	$(MAKE) clean -C dpf/dgl
+{%- endif %}
 	$(MAKE) clean -C dpf/utils/lv2-ttl-generator
 	$(MAKE) clean -C plugins/{{ cookiecutter.plugin_name }}
 	rm -rf bin build
