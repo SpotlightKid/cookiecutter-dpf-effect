@@ -24,7 +24,7 @@ submodules:
 libs:
 ifeq (,$(wildcard dpf/dgl))
 	$(error $(MISSING_SUBMODULES_ERROR))
-{%- if cookiecutter.has_ui %}
+{%- if cookiecutter.ui_type != "none" %}
 else
 	$(MAKE) -C dpf/dgl
 {%- endif %}
@@ -49,7 +49,7 @@ endif
 # --------------------------------------------------------------
 
 clean:
-{%- if cookiecutter.has_ui %}
+{%- if cookiecutter.ui_type != "none" %}
 	$(MAKE) clean -C dpf/dgl
 {%- endif %}
 	$(MAKE) clean -C dpf/utils/lv2-ttl-generator

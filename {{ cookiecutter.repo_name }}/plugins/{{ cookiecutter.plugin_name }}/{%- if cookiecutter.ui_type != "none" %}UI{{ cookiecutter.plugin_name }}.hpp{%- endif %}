@@ -17,8 +17,11 @@ protected:
 
     void uiIdle() override;
     void uiReshape(uint width, uint height) override;
-
+{% if cookiecutter.ui_type == "opengl" %}
+    void onDisplay() override;
+{% elif cookiecutter.ui_type == "nanovg" %}
     void onNanoDisplay() override;
+{% endif %}
     bool onKeyboard(const KeyboardEvent& ev) override;
     bool onSpecial(const SpecialEvent& ev) override;
     bool onMouse(const MouseEvent& ev) override;

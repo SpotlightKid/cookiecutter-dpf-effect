@@ -21,9 +21,16 @@
 #define DISTRHO_PLUGIN_BRAND "{{ cookiecutter.plugin_brand }}"
 #define DISTRHO_PLUGIN_NAME  "{{ cookiecutter.plugin_name }}"
 #define DISTRHO_PLUGIN_URI   "{{ cookiecutter.plugin_uri }}"
-
+{% if cookiecutter.ui_type == "none" %}
+#define DISTRHO_PLUGIN_HAS_UI        0
+{% else %}
 #define DISTRHO_PLUGIN_HAS_UI        1
+{%- if cookiecutter.ui_type == "nanovg" %}
 #define DISTRHO_UI_USE_NANOVG        1
+{%- else %}
+#define DISTRHO_UI_USE_NANOVG        0
+{%- endif %}
+{% endif %}
 #define DISTRHO_PLUGIN_IS_RT_SAFE    1
 #define DISTRHO_PLUGIN_NUM_INPUTS    2
 #define DISTRHO_PLUGIN_NUM_OUTPUTS   2

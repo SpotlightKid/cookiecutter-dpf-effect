@@ -42,11 +42,15 @@ void UI{{ cookiecutter.plugin_name }}::uiReshape(uint width, uint height) {
     (void)width;
     (void)height;
 }
+{% if cookiecutter.ui_type == "opengl" %}
+void UI{{ cookiecutter.plugin_name }}::onDisplay() {
 
+}
+{% elif cookiecutter.ui_type == "nanovg" %}
 void UI{{ cookiecutter.plugin_name }}::onNanoDisplay() {
 
 }
-
+{% endif %}
 bool UI{{ cookiecutter.plugin_name }}::onKeyboard(const KeyboardEvent& ev) {
     return false;
     (void)ev;

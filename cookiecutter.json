@@ -12,5 +12,5 @@
     "project_license": "MIT",
     "version": "0.1.0",
     "year": "2018",
-    "has_ui": true
+    "ui_type": ["opengl", "nanovg", "none"]
 }
