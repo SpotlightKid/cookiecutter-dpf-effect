@@ -23,11 +23,10 @@ BUILD_LADSPA ?= false
 
 FILES_DSP = \
 	Plugin{{ cookiecutter.plugin_name }}.cpp
-
-{%- if cookiecutter.ui_type != "none" %}
+{% if cookiecutter.ui_type != "none" %}
 FILES_UI = \
 	UI{{ cookiecutter.plugin_name }}.cpp
-{%- endif %}
+{% endif %}
 # --------------------------------------------------------------
 # Do some magic
 
