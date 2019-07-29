@@ -107,7 +107,7 @@ void UI{{ cookiecutter.plugin_name }}::onNanoDisplay() {
 {% endif %}
 
 // -----------------------------------------------------------------------
-// Optional widget callbacks; return 'true' to stop event propagation, false otherwise
+// Optional widget callbacks; return true to stop event propagation, false otherwise.
 
 /**
   A function called when a key is pressed or released.
