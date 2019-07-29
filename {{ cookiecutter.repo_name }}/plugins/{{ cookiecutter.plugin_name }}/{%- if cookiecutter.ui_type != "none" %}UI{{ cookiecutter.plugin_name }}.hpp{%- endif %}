@@ -2,6 +2,7 @@
 #define UI_{{ cookiecutter.plugin_name | upper }}_H
 
 #include "DistrhoUI.hpp"
+#include "Plugin{{ cookiecutter.plugin_name }}.hpp"
 
 START_NAMESPACE_DISTRHO
 
