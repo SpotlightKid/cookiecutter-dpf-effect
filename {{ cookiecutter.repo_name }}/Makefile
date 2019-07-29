@@ -10,25 +10,13 @@ all: libs plugins gen
 
 # --------------------------------------------------------------
 
-define MISSING_SUBMODULES_ERROR
-
-Could not find DPF. Please run "make submodules" to clone the missing submodules.
-
-endef
-
-# --------------------------------------------------------------
-
 submodules: 
 	git submodule update --init --recursive
 
 libs:
-ifeq (,$(wildcard dpf/dgl))
-	$(error $(MISSING_SUBMODULES_ERROR))
 {%- if cookiecutter.ui_type != "none" %}
-else
 	$(MAKE) -C dpf/dgl
 {%- endif %}
-endif
 
 plugins: libs
 	$(MAKE) all -C plugins/{{ cookiecutter.plugin_name }}
