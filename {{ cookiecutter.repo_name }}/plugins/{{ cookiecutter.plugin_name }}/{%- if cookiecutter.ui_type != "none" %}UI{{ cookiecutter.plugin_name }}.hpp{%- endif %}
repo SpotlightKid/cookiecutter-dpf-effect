@@ -47,9 +47,6 @@ protected:
     bool onScroll(const ScrollEvent& ev) override;
 
 private:
-    float    fParams[Plugin{{ cookiecutter.plugin_name }}::paramCount];
-    double   fSampleRate;
-
     DISTRHO_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(UI{{ cookiecutter.plugin_name }})
 };
 

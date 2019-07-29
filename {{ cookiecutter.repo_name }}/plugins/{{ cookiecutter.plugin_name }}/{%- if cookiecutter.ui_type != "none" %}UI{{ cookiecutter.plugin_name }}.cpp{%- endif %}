@@ -19,6 +19,9 @@
 
 START_NAMESPACE_DISTRHO
 
+// -----------------------------------------------------------------------
+// Init / Deinit
+
 UI{{ cookiecutter.plugin_name }}::UI{{ cookiecutter.plugin_name }}()
 : UI(600, 400)  {
 
@@ -28,72 +31,128 @@ UI{{ cookiecutter.plugin_name }}::~UI{{ cookiecutter.plugin_name }}() {
 
 }
 
-void UI{{ cookiecutter.plugin_name }}::parameterChanged(uint32_t index, float value) {
-    fParams[index] = value;
+// -----------------------------------------------------------------------
+// DSP/Plugin callbacks
 
+/**
+  A parameter has changed on the plugin side.@n
+  This is called by the host to inform the UI about parameter changes.
+*/
+void UI{{ cookiecutter.plugin_name }}::parameterChanged(uint32_t index, float value) {
     switch (index) {
         case Plugin{{ cookiecutter.plugin_name }}::paramVolume:
-            // do something when volume param is set
+            // do something when volume param is set, such as update a widget
             break;
     }
 }
 
+/**
+  A program has been loaded on the plugin side.@n
+  This is called by the host to inform the UI about program changes.
+*/
 void UI{{ cookiecutter.plugin_name }}::programLoaded(uint32_t index) {
     switch (index) {
         case 0:
-            fParams[PluginSimpleGain::paramVolume] = 0.1f;
+            // set values for each parameter and update their widgets
+            parameterChanged(PluginSimpleGain::paramVolume, 0.1f);
             break;
     }
 }
 
+/**
+  Optional callback to inform the UI about a sample rate change on the plugin side.
+*/
 void UI{{ cookiecutter.plugin_name }}::sampleRateChanged(double newSampleRate) {
-    fSampleRate = newSampleRate;
+
 }
 
+// -----------------------------------------------------------------------
+// Optional UI callbacks
+
+/**
+  Idle callback.
+  This function is called at regular intervals.
+*/
 void UI{{ cookiecutter.plugin_name }}::uiIdle() {
 
 }
 
+/**
+  Window reshape function, called when the parent window is resized.
+*/
 void UI{{ cookiecutter.plugin_name }}::uiReshape(uint width, uint height) {
     (void)width;
     (void)height;
 }
+
+// -----------------------------------------------------------------------
+// Widget callbacks
+
 {% if cookiecutter.ui_type == "opengl" %}
+/**
+  A function called to draw the view contents with OpenGL.
+*/
 void UI{{ cookiecutter.plugin_name }}::onDisplay() {
 
 }
 {% elif cookiecutter.ui_type == "nanovg" %}
+/**
+  A function called to draw the view contents with NanoVG.
+*/
 void UI{{ cookiecutter.plugin_name }}::onNanoDisplay() {
 
 }
 {% endif %}
+
+// -----------------------------------------------------------------------
+// Optional widget callbacks; return 'true' to stop event propagation, false otherwise
+
+/**
+  A function called when a key is pressed or released.
+*/
 bool UI{{ cookiecutter.plugin_name }}::onKeyboard(const KeyboardEvent& ev) {
     return false;
     (void)ev;
 }
 
+/**
+  A function called when a special key is pressed or released.
+*/
 bool UI{{ cookiecutter.plugin_name }}::onSpecial(const SpecialEvent& ev) {
     return false;
     (void)ev;
 }
 
+/**
+  A function called when a mouse button is pressed or released.
+*/
 bool UI{{ cookiecutter.plugin_name }}::onMouse(const MouseEvent& ev) {
     return false;
     (void)ev;
 }
 
+/**
+  A function called when the mouse pointer moves.
+*/
 bool UI{{ cookiecutter.plugin_name }}::onMotion(const MotionEvent& ev) {
     return false;
     (void)ev;
 }
 
+/**
+  A function called on scrolling (e.g. mouse wheel or track pad).
+*/
 bool UI{{ cookiecutter.plugin_name }}::onScroll(const ScrollEvent& ev) {
     return false;
     (void)ev;
 }
 
+// -----------------------------------------------------------------------
+
 UI* createUI() {
     return new UI{{ cookiecutter.plugin_name }}();
 }
+
+// -----------------------------------------------------------------------
 
 END_NAMESPACE_DISTRHO
