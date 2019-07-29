@@ -25,7 +25,7 @@ void UI{{ cookiecutter.plugin_name }}::parameterChanged(uint32_t index, float va
 void UI{{ cookiecutter.plugin_name }}::programLoaded(uint32_t index) {
     switch (index) {
         case 0:
-            setParameterValue(Plugin{{ cookiecutter.plugin_name }}::paramVolume, 0.1f);
+            fParams[PluginSimpleGain::paramVolume] = 0.1f;
             break;
     }
 }
