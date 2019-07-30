@@ -11,5 +11,6 @@
     "plugin_uri": "https://{{ cookiecutter.domain }}/plugins/{{ cookiecutter.repo_name }}",
     "project_license": "MIT",
     "version": "0.1.0",
-    "year": "2018"
+    "year": "2019",
+    "ui_type": ["opengl", "nanovg", "none"]
 }

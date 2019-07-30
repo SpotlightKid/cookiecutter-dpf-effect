@@ -22,11 +22,13 @@
 #define DISTRHO_PLUGIN_NAME  "{{ cookiecutter.plugin_name }}"
 #define DISTRHO_PLUGIN_URI   "{{ cookiecutter.plugin_uri }}"
 
-#define DISTRHO_PLUGIN_HAS_UI       0
-#define DISTRHO_PLUGIN_IS_RT_SAFE   1
-#define DISTRHO_PLUGIN_NUM_INPUTS   2
-#define DISTRHO_PLUGIN_NUM_OUTPUTS  2
-#define DISTRHO_PLUGIN_WANT_TIMEPOS 0
+#define DISTRHO_PLUGIN_HAS_UI        {{ 0 if cookiecutter.ui_type == "none" else 1 }}
+#define DISTRHO_UI_USE_NANOVG        {{ 1 if cookiecutter.ui_type == "nanovg" else 0 }}
+
+#define DISTRHO_PLUGIN_IS_RT_SAFE    1
+#define DISTRHO_PLUGIN_NUM_INPUTS    2
+#define DISTRHO_PLUGIN_NUM_OUTPUTS   2
+#define DISTRHO_PLUGIN_WANT_TIMEPOS  0
 #define DISTRHO_PLUGIN_WANT_PROGRAMS 1
 
 #endif // DISTRHO_PLUGIN_INFO_H
