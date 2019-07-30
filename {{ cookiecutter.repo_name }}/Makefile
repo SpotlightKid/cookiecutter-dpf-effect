@@ -10,7 +10,7 @@ all: libs plugins gen
 
 # --------------------------------------------------------------
 
-submodules: 
+submodules:
 	git submodule update --init --recursive
 
 libs:
@@ -44,6 +44,12 @@ clean:
 	$(MAKE) clean -C plugins/{{ cookiecutter.plugin_name }}
 	rm -rf bin build
 
+install: all
+	$(MAKE) install -C plugins/{{ cookiecutter.plugin_name }}
+
+install-user: all
+	$(MAKE) install-user -C plugins/{{ cookiecutter.plugin_name }}
+
 # --------------------------------------------------------------
 
-.PHONY: plugins
+.PHONY: all clean install install-user plugins submodule

@@ -5,6 +5,17 @@
 #
 
 # --------------------------------------------------------------
+# Installation directories
+
+PREFIX ?= /usr/local
+BINDIR ?= $(PREFIX)/bin
+LIBDIR ?= $(PREFIX)/lib
+DSSI_DIR ?= $(LIBDIR)/dssi
+LADSPA_DIR ?= $(LIBDIR)/ladspa
+LV2_DIR ?= $(LIBDIR)/lv2
+VST_DIR ?= $(LIBDIR)/vst
+
+# --------------------------------------------------------------
 # Project name, used for binaries
 
 NAME = {{ cookiecutter.plugin_name | lower }}
@@ -67,4 +78,42 @@ endif
 
 all: $(TARGETS)
 
+install: all
+ifeq ($(BUILD_DSSI),true)
+	@install -Dm755 $(TARGET_DIR)/$(NAME)-dssi$(LIB_EXT) -t $(DESTDIR)$(DSSI_DIR)
+endif
+ifeq ($(BUILD_LADSPA),true)
+	@install -Dm755 $(TARGET_DIR)/$(NAME)-ladspa$(LIB_EXT) -t $(DESTDIR)$(LADSPA_DIR)
+endif
+ifeq ($(BUILD_VST2),true)
+	@install -Dm755 $(TARGET_DIR)/$(NAME)-vst$(LIB_EXT) -t $(DESTDIR)$(VST_DIR)
+endif
+ifeq ($(BUILD_LV2),true)
+	@install -dm755 $(DESTDIR)$(LV2_DIR) && \
+		cp -rf $(TARGET_DIR)/$(NAME).lv2 $(DESTDIR)$(LV2_DIR)
+endif
+ifeq ($(HAVE_JACK),true)
+	@install -Dm755 $(TARGET_DIR)/$(NAME)$(APP_EXT) -t $(DESTDIR)$(BINDIR)
+endif
+
+install-user: all
+ifeq ($(BUILD_DSSI),true)
+	@install -Dm755 $(TARGET_DIR)/$(NAME)-dssi$(LIB_EXT) -t $(HOME)/.dssi
+endif
+ifeq ($(BUILD_LADSPA),true)
+	@install -Dm755 $(TARGET_DIR)/$(NAME)-ladspa$(LIB_EXT) -t $(HOME)/.ladspa
+endif
+ifeq ($(BUILD_VST2),true)
+	@install -Dm755 $(TARGET_DIR)/$(NAME)-vst$(LIB_EXT) -t $(HOME)/.vst
+endif
+ifeq ($(BUILD_LV2),true)
+	@install -dm755 $(HOME)/.lv2 && \
+		cp -rf $(TARGET_DIR)/$(NAME).lv2 $(HOME)/.lv2
+endif
+ifeq ($(BUILD_JACK),true)
+	@install -Dm755 $(TARGET_DIR)/$(NAME)$(APP_EXT) -t $(HOME)/bin
+endif
+
 # --------------------------------------------------------------
+
+.PHONY: all install install-user

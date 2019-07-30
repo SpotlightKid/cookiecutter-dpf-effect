@@ -76,6 +76,28 @@ named after the value you specified for `plugin_name`. Adapt it as you see fit
 and run `make` again to update your binaries. The second compilation will be
 much faster, because the DPF library has already been built.
 
+To install the plugins system-wide, run `make install` (root priviledges may be
+required). The usual `PREFIX` and `DESTDIR` makefile variables are honoured to
+change the prefix directory (default: `/usr/local`) and the installation
+destination (for distribution packaging).
+
+Use make's `-n` option to see where the plugins would be installed without
+actually installing them.
+
+You can also set the installation directory for each plugin format with a
+dedicated makefile variable.
+
+* DSSI: `DSSI_DIR` (`<prefix>/lib/dssi`)
+* LADSPA: `LADSPA_DIR` (`<prefix>/lib/ladspa`)
+* LV2: `LV2_DIR` (`<prefix>/lib/lv2`)
+* VST2: `VST_DIR` (`<prefix>/lib/vst`)
+* Stand-alone JACK client program: `BINDIR` (`<prefix>/bin`)
+
+Example: `make DESTDIR=/tmp/build-root VST_DIR=/usr/lib/lxvst install`
+
+To install the plugins under your user's home directory, run `make install-user`.
+No special makefile variables are used in this case.
+
 
 Requirements
 ------------
