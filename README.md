@@ -28,7 +28,12 @@ Here is an example:
     plugin_uri [http://chrisarndt.de/plugins/simplegain]:
     project_license [MIT]:
     version [0.1.0]:
-    year [2018]:
+    year [2019]:
+    Select ui_type:
+    1 - opengl
+    2 - nanovg
+    3 - none
+    Choose from 1, 2, 3 [1]: 3
 
     Running post-project-generation hook...
 
@@ -48,10 +53,8 @@ Here is an example:
      create mode 100644 .gitmodules
      create mode 100644 LICENSE
      create mode 100644 Makefile
-     create mode 100644 Makefile.mk
      create mode 100644 README.md
      create mode 160000 dpf
-     create mode 100644 plugins/Makefile.mk
      create mode 100644 plugins/SimpleGain/DistrhoPluginInfo.h
      create mode 100644 plugins/SimpleGain/Makefile
      create mode 100644 plugins/SimpleGain/PluginSimpleGain.cpp
