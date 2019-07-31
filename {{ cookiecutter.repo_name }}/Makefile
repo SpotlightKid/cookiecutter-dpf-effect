@@ -1,7 +1,7 @@
 #!/usr/bin/make -f
 # Makefile for DISTRHO Plugins #
 # ---------------------------- #
-# Created by falkTX
+# Created by falkTX, Christopher Arndt, and Patrick Desaulniers
 #
 
 include dpf/Makefile.base.mk
