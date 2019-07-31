@@ -16,6 +16,7 @@
  */
 
 #include "UI{{ cookiecutter.plugin_name }}.hpp"
+#include "Window.hpp"
 
 START_NAMESPACE_DISTRHO
 
@@ -90,12 +91,17 @@ void UI{{ cookiecutter.plugin_name }}::uiReshape(uint width, uint height) {
 // -----------------------------------------------------------------------
 // Widget callbacks
 
-{% if cookiecutter.ui_type == "opengl" %}
+{% if cookiecutter.ui_type in ["opengl", "cairo"] %}
 /**
-  A function called to draw the view contents with OpenGL.
+  A function called to draw the view contents.
 */
 void UI{{ cookiecutter.plugin_name }}::onDisplay() {
+{% if cookiecutter.ui_type == "cairo" %}
+    cairo_t* cr = getParentWindow().getGraphicsContext().cairo;
 
+    cairo_set_source_rgb(cr, 0, 0, 0);
+    cairo_paint(cr);
+{%- endif %}
 }
 {% elif cookiecutter.ui_type == "nanovg" %}
 /**

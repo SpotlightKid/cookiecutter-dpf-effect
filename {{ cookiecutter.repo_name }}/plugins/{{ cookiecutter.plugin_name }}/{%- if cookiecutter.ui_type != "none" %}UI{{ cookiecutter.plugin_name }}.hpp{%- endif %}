@@ -35,7 +35,7 @@ protected:
 
     void uiIdle() override;
     void uiReshape(uint width, uint height) override;
-{% if cookiecutter.ui_type == "opengl" %}
+{% if cookiecutter.ui_type in ["opengl", "cairo"] %}
     void onDisplay() override;
 {% elif cookiecutter.ui_type == "nanovg" %}
     void onNanoDisplay() override;
