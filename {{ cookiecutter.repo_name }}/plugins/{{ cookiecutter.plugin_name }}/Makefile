@@ -40,7 +40,9 @@ FILES_UI = \
 {% endif %}
 # --------------------------------------------------------------
 # Do some magic
-
+{% if cookiecutter.ui_type != "none" %}
+UI_TYPE = {{ "cairo" if cookiecutter.ui_type == "cairo" else "opengl" }}
+{%- endif %}
 include ../../dpf/Makefile.plugins.mk
 
 # --------------------------------------------------------------
