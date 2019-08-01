@@ -7,7 +7,9 @@ effect plugins.
 To create a DPF effect plugin using this template, install cookiecutter (see
 the [installation instructions]) and then run:
 
-    $ cookiecutter https://github.com/SpotlightKid/cookiecutter-dpf-effect
+```console
+$ cookiecutter https://github.com/SpotlightKid/cookiecutter-dpf-effect
+```
 
 and enter the plugin name and other info at the prompts. See the
 [cookiecutter documentation] on how to change the default values for these
