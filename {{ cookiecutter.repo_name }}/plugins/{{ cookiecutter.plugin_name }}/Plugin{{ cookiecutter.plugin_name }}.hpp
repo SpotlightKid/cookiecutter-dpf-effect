@@ -104,7 +104,12 @@ protected:
     // Process
 
     void activate() override;
+{% if cookiecutter.want_midi_input == "no" %}
     void run(const float**, float** outputs, uint32_t frames) override;
+{% else %}
+    void run(const float**, float** outputs, uint32_t frames,
+             const MidiEvent* midiEvents, uint32_t midiEventCount) override;
+{% endif %}
 
     // -------------------------------------------------------------------
 
