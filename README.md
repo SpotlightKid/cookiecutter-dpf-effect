@@ -115,3 +115,12 @@ Requirements
 [cookiecutter documentation]: https://cookiecutter.readthedocs.io/en/0.9.1/advanced_usage.html#user-config-0-7-0
 [DPF]: https://github.com/DISTRHO/DPF
 [installation instructions]: http://cookiecutter.readthedocs.org/en/latest/installation.html
+
+
+Authors
+-------
+
+* Christopher Arndt (@SpotlightKid), based on DPF examples by
+* Filipe Coelho (@falkTX)
+* Patrick Desaulniers (@pdesaulniers)
+* Jean Pierre Cimalando (@jpcima)
