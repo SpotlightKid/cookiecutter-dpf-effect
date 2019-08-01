@@ -27,7 +27,10 @@ BUILD_LV2 ?= true
 BUILD_VST2 ?= true
 BUILD_JACK ?= true
 BUILD_DSSI ?= false
-BUILD_LADSPA ?= {{ "true" if cookiecutter.ui_type == "none" else "false" }}
+BUILD_LADSPA ?= {{ "true" if cookiecutter.ui_type == "none" and
+                             cookiecutter.want_midi_input == "no" and
+                             cookiecutter.want_midi_output == "no"
+                          else "false" }}
 
 # --------------------------------------------------------------
 # Files to build
