@@ -12,5 +12,7 @@
     "project_license": "MIT",
     "version": "0.1.0",
     "year": "2019",
-    "ui_type": ["opengl", "nanovg", "cairo", "none"]
+    "ui_type": ["opengl", "nanovg", "cairo", "none"],
+    "want_midi_input": ["no", "yes"],
+    "want_midi_output": ["no", "yes"]
 }
