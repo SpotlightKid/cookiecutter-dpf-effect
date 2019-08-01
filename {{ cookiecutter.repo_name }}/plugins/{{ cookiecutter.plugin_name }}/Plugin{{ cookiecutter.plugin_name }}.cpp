@@ -123,13 +123,14 @@ void Plugin{{ cookiecutter.plugin_name }}::activate() {
     // plugin is activated
 }
 
+{% set indent = " " * (cookiecutter.plugin_name | length + 17) %}
 {% if cookiecutter.want_midi_input == "no" %}
 void Plugin{{ cookiecutter.plugin_name }}::run(const float** inputs, float** outputs,
-                                  uint32_t frames) {
+{{ indent }}uint32_t frames) {
 {% else %}
 void Plugin{{ cookiecutter.plugin_name }}::run(const float** inputs, float** outputs,
-                                  uint32_t frames,
-                                  const MidiEvent* midiEvents, uint32_t midiEventCount) {
+{{ indent }}uint32_t frames,
+{{ indent }}const MidiEvent* midiEvents, uint32_t midiEventCount) {
 {% endif %}
     // get the left and right audio inputs
     const float* const inpL = inputs[0];
