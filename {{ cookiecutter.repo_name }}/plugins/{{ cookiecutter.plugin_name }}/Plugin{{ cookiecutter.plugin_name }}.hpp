@@ -38,7 +38,8 @@ START_NAMESPACE_DISTRHO
 class Plugin{{ cookiecutter.plugin_name }} : public Plugin {
 public:
     enum Parameters {
-        paramVolume = 0,
+        paramVolumeLeft = 0,
+        paramVolumeRight,
         paramCount
     };
 
@@ -119,6 +120,24 @@ private:
 
     DISTRHO_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(Plugin{{ cookiecutter.plugin_name }})
 };
+
+struct Preset {
+    const char* name;
+    float params[Plugin{{ cookiecutter.plugin_name }}::paramCount];
+};
+
+const Preset factoryPresets[] = {
+    {
+        "Default",
+        {0.2f, 0.2f}
+    }
+    //,{
+    //    "Another preset",  // preset name
+    //    {0.5f, ...}        // array of presetCount float param values
+    //}
+};
+
+const uint presetCount = sizeof(factoryPresets) / sizeof(Preset);
 
 // -----------------------------------------------------------------------
 

@@ -35,10 +35,12 @@ START_NAMESPACE_DISTRHO
 // -----------------------------------------------------------------------
 
 Plugin{{ cookiecutter.plugin_name }}::Plugin{{ cookiecutter.plugin_name }}()
-    : Plugin(paramCount, 1, 0)  // paramCount params, 1 program(s), 0 states
+    : Plugin(paramCount, presetCount, 0)  // paramCount param(s), presetCount program(s), 0 states
 {
     sampleRateChanged(getSampleRate());
-    loadProgram(0);
+    if (presetCount > 0) {
+        loadProgram(0);
+    }
 }
 
 // -----------------------------------------------------------------------
@@ -54,9 +56,13 @@ void Plugin{{ cookiecutter.plugin_name }}::initParameter(uint32_t index, Paramet
     parameter.hints = kParameterIsAutomable | kParameterIsLogarithmic;
 
     switch (index) {
-        case paramVolume:
-            parameter.name = "Volume";
-            parameter.symbol = "volume";
+        case paramVolumeLeft:
+            parameter.name = "Volume L";
+            parameter.symbol = "volume_l";
+            break;
+        case paramVolumeRight:
+            parameter.name = "Volume R";
+            parameter.symbol = "volume_r";
             break;
     }
 }
@@ -66,10 +72,8 @@ void Plugin{{ cookiecutter.plugin_name }}::initParameter(uint32_t index, Paramet
   This function will be called once, shortly after the plugin is created.
 */
 void Plugin{{ cookiecutter.plugin_name }}::initProgramName(uint32_t index, String& programName) {
-    switch (index) {
-        case 0:
-            programName = "Default";
-            break;
+    if (index < presetCount) {
+        programName = factoryPresets[index].name;
     }
 }
 
@@ -97,8 +101,11 @@ void Plugin{{ cookiecutter.plugin_name }}::setParameterValue(uint32_t index, flo
     fParams[index] = value;
 
     switch (index) {
-        case paramVolume:
-            // do something when volume param is set
+        case paramVolumeLeft:
+            // do something when volume_r param is set
+            break;
+        case paramVolumeRight:
+            // same for volume_r param
             break;
     }
 }
@@ -109,10 +116,10 @@ void Plugin{{ cookiecutter.plugin_name }}::setParameterValue(uint32_t index, flo
   including realtime processing.
 */
 void Plugin{{ cookiecutter.plugin_name }}::loadProgram(uint32_t index) {
-    switch (index) {
-        case 0:
-            setParameterValue(paramVolume, 0.1f);
-            break;
+    if (index < presetCount) {
+        for (int i=0; i < paramCount; i++) {
+            setParameterValue(i, factoryPresets[index].params[i]);
+        }
     }
 }
 
@@ -140,12 +147,10 @@ void Plugin{{ cookiecutter.plugin_name }}::run(const float** inputs, float** out
     float* const outL = outputs[0];
     float* const outR = outputs[1];
 
-    float vol = fParams[paramVolume];
-
     // apply gain against all samples
     for (uint32_t i=0; i < frames; ++i) {
-        outL[i] = inpL[i] * vol;
-        outR[i] = inpR[i] * vol;
+        outL[i] = inpL[i] * fParams[paramVolumeLeft];
+        outR[i] = inpR[i] * fParams[paramVolumeRight];
     }
 }
 

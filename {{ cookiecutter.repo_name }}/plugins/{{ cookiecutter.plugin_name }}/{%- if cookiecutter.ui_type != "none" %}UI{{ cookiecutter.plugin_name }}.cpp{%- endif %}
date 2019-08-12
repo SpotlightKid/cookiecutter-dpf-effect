@@ -52,8 +52,11 @@ UI{{ cookiecutter.plugin_name }}::~UI{{ cookiecutter.plugin_name }}() {
 */
 void UI{{ cookiecutter.plugin_name }}::parameterChanged(uint32_t index, float value) {
     switch (index) {
-        case Plugin{{ cookiecutter.plugin_name }}::paramVolume:
-            // do something when volume param is set, such as update a widget
+        case Plugin{{ cookiecutter.plugin_name }}::paramVolumeLeft:
+            // do something when volume_l param is set, such as update a widget
+            break;
+        case Plugin{{ cookiecutter.plugin_name }}::paramVolumeRight:
+            // same for volume_r param
             break;
     }
 
@@ -65,11 +68,11 @@ void UI{{ cookiecutter.plugin_name }}::parameterChanged(uint32_t index, float va
   This is called by the host to inform the UI about program changes.
 */
 void UI{{ cookiecutter.plugin_name }}::programLoaded(uint32_t index) {
-    switch (index) {
-        case 0:
+    if (index < presetCount) {
+        for (int i=0; i < Plugin{{ cookiecutter.plugin_name }}::paramCount; i++) {
             // set values for each parameter and update their widgets
-            parameterChanged(PluginSimpleGain::paramVolume, 0.1f);
-            break;
+            parameterChanged(i, factoryPresets[index].params[i]);
+        }
     }
 }
 
