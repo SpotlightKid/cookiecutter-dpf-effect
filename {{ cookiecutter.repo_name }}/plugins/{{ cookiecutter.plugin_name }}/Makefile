@@ -70,9 +70,11 @@ endif
 endif
 
 ifeq ($(BUILD_DSSI),true)
+ifneq ($(MACOS_OR_WINDOWS),true)
 ifeq ($(HAVE_{{ "CAIRO" if cookiecutter.ui_type == "cairo" else "DGL" }}),true)
 ifeq ($(HAVE_LIBLO),true)
 TARGETS += dssi
+endif
 endif
 endif
 endif
@@ -85,9 +87,11 @@ all: $(TARGETS)
 
 install: all
 ifeq ($(BUILD_DSSI),true)
+ifneq ($(MACOS_OR_WINDOWS),true)
 ifeq ($(HAVE_{{ "CAIRO" if cookiecutter.ui_type == "cairo" else "DGL" }}),true)
 ifeq ($(HAVE_LIBLO),true)
 	@install -Dm755 $(TARGET_DIR)/$(NAME)-dssi$(LIB_EXT) -t $(DESTDIR)$(DSSI_DIR)
+endif
 endif
 endif
 endif
@@ -109,9 +113,11 @@ endif
 
 install-user: all
 ifeq ($(BUILD_DSSI),true)
+ifneq ($(MACOS_OR_WINDOWS),true)
 ifeq ($(HAVE_{{ "CAIRO" if cookiecutter.ui_type == "cairo" else "DGL" }}),true)
 ifeq ($(HAVE_LIBLO),true)
 	@install -Dm755 $(TARGET_DIR)/$(NAME)-dssi$(LIB_EXT) -t $(HOME)/.dssi
+endif
 endif
 endif
 endif
