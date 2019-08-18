@@ -8,7 +8,7 @@ from subprocess import call
 
 
 submodule = "dpf"
-submodule_url = "git://github.com/DISTRHO/DPF.git"
+submodule_url = "https://github.com/DISTRHO/DPF.git"
 git_url = "git@github.com:{{ cookiecutter.github_username }}/{{ cookiecutter.repo_name }}"
 
 print("\nRunning post-project-generation hook...\n")
