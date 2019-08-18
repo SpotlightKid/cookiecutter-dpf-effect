@@ -31,7 +31,11 @@ endif
 dpf/utils/lv2_ttl_generator:
 	$(MAKE) -C dpf/utils/lv2-ttl-generator
 else
-gen:
+gen: plugins dpf/utils/lv2_ttl_generator.exe
+	@$(CURDIR)/dpf/utils/generate-ttl.sh
+
+dpf/utils/lv2_ttl_generator.exe:
+	$(MAKE) -C dpf/utils/lv2-ttl-generator WINDOWS=true
 endif
 
 # --------------------------------------------------------------

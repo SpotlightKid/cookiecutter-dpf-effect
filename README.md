@@ -113,8 +113,20 @@ dedicated makefile variable.
 
 Example: `make DESTDIR=/tmp/build-root VST_DIR=/usr/lib/lxvst install`
 
-To install the plugins under your user's home directory, run `make install-user`.
-No special makefile variables are used in this case.
+To install the plugins only for your current user account, run
+`make install-user`.
+
+Again, you can also set the installation directory for each plugin format with
+a dedicated makefile variable.
+
+* DSSI: `USER_DSSI_DIR` (`$HOME/.dssi`)
+* LADSPA: `USER_LADSPA_DIR` (`$HOME/.ladspa`)
+* LV2: `USER_LV2_DIR` (`$HOME/.lv2`)
+* VST2: `USER_VST_DIR` (`$HOME/.vst`)
+* Stand-alone JACK client program: `<none>` (`$HOME/bin`)
+
+*Note: The given default values for all of the above listed environment
+variables differ depending on the target OS.*
 
 
 Requirements
