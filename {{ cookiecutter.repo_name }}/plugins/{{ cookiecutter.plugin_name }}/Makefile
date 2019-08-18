@@ -52,7 +52,7 @@ include ../../dpf/Makefile.plugins.mk
 # Enable all selected plugin types
 
 ifeq ($(BUILD_LV2),true)
-ifeq ($(HAVE_DGL),true)
+ifeq ($(HAVE_{{ "CAIRO" if cookiecutter.ui_type == "cairo" else "DGL" }}),true)
 TARGETS += lv2_sep
 else
 TARGETS += lv2_dsp
@@ -70,7 +70,7 @@ endif
 endif
 
 ifeq ($(BUILD_DSSI),true)
-ifeq ($(HAVE_DGL),true)
+ifeq ($(HAVE_{{ "CAIRO" if cookiecutter.ui_type == "cairo" else "DGL" }}),true)
 ifeq ($(HAVE_LIBLO),true)
 TARGETS += dssi
 endif
@@ -85,7 +85,11 @@ all: $(TARGETS)
 
 install: all
 ifeq ($(BUILD_DSSI),true)
+ifeq ($(HAVE_{{ "CAIRO" if cookiecutter.ui_type == "cairo" else "DGL" }}),true)
+ifeq ($(HAVE_LIBLO),true)
 	@install -Dm755 $(TARGET_DIR)/$(NAME)-dssi$(LIB_EXT) -t $(DESTDIR)$(DSSI_DIR)
+endif
+endif
 endif
 ifeq ($(BUILD_LADSPA),true)
 	@install -Dm755 $(TARGET_DIR)/$(NAME)-ladspa$(LIB_EXT) -t $(DESTDIR)$(LADSPA_DIR)
@@ -97,13 +101,19 @@ ifeq ($(BUILD_LV2),true)
 	@install -dm755 $(DESTDIR)$(LV2_DIR) && \
 		cp -rf $(TARGET_DIR)/$(NAME).lv2 $(DESTDIR)$(LV2_DIR)
 endif
+ifeq ($(BUILD_JACK),true)
 ifeq ($(HAVE_JACK),true)
 	@install -Dm755 $(TARGET_DIR)/$(NAME)$(APP_EXT) -t $(DESTDIR)$(BINDIR)
+endif
 endif
 
 install-user: all
 ifeq ($(BUILD_DSSI),true)
+ifeq ($(HAVE_{{ "CAIRO" if cookiecutter.ui_type == "cairo" else "DGL" }}),true)
+ifeq ($(HAVE_LIBLO),true)
 	@install -Dm755 $(TARGET_DIR)/$(NAME)-dssi$(LIB_EXT) -t $(HOME)/.dssi
+endif
+endif
 endif
 ifeq ($(BUILD_LADSPA),true)
 	@install -Dm755 $(TARGET_DIR)/$(NAME)-ladspa$(LIB_EXT) -t $(HOME)/.ladspa
@@ -116,7 +126,9 @@ ifeq ($(BUILD_LV2),true)
 		cp -rf $(TARGET_DIR)/$(NAME).lv2 $(HOME)/.lv2
 endif
 ifeq ($(BUILD_JACK),true)
+ifeq ($(HAVE_JACK),true)
 	@install -Dm755 $(TARGET_DIR)/$(NAME)$(APP_EXT) -t $(HOME)/bin
+endif
 endif
 
 # --------------------------------------------------------------
