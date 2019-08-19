@@ -56,4 +56,4 @@ install-user: all
 
 # --------------------------------------------------------------
 
-.PHONY: all clean install install-user plugins submodule
+.PHONY: all clean install install-user submodule libs plugins gen
