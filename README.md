@@ -31,7 +31,7 @@ repo_name [simplegain]:
 plugin_uri [http://chrisarndt.de/plugins/simplegain]:
 project_license [MIT]:
 version [0.1.0]:
-year [2019]:
+year [2020]:
 Select ui_type:
 1 - opengl
 2 - nanovg
