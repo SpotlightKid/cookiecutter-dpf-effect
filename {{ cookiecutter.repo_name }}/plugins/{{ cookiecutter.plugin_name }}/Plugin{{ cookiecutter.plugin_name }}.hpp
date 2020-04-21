@@ -30,20 +30,38 @@
 #define PLUGIN_{{ cookiecutter.plugin_name | upper }}_H
 
 #include "DistrhoPlugin.hpp"
+#include "CParamSmooth.hpp"
 
 START_NAMESPACE_DISTRHO
+
+#ifndef MIN
+#define MIN(a,b) ( (a) < (b) ? (a) : (b) )
+#endif
+
+#ifndef MAX
+#define MAX(a,b) ( (a) > (b) ? (a) : (b) )
+#endif
+
+#ifndef CLAMP
+#define CLAMP(v, min, max) (MIN((max), MAX((min), (v))))
+#endif
+
+#ifndef DB_CO
+#define DB_CO(g) ((g) > -90.0f ? powf(10.0f, (g) * 0.05f) : 0.0f)
+#endif
 
 // -----------------------------------------------------------------------
 
 class Plugin{{ cookiecutter.plugin_name }} : public Plugin {
 public:
     enum Parameters {
-        paramVolumeLeft = 0,
-        paramVolumeRight,
+        paramGain = 0,
         paramCount
     };
 
     Plugin{{ cookiecutter.plugin_name }}();
+
+    ~Plugin{{ cookiecutter.plugin_name }}();
 
 protected:
     // -------------------------------------------------------------------
@@ -115,8 +133,10 @@ protected:
     // -------------------------------------------------------------------
 
 private:
-    float    fParams[paramCount];
-    double   fSampleRate;
+    float           fParams[paramCount];
+    double          fSampleRate;
+    float           gain;
+    CParamSmooth    *smooth_gain;
 
     DISTRHO_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(Plugin{{ cookiecutter.plugin_name }})
 };
@@ -128,12 +148,12 @@ struct Preset {
 
 const Preset factoryPresets[] = {
     {
-        "Default",
-        {0.2f, 0.2f}
+        "Unity Gain",
+        {0.0f}
     }
     //,{
     //    "Another preset",  // preset name
-    //    {0.5f, ...}        // array of presetCount float param values
+    //    {-14.0f, ...}      // array of presetCount float param values
     //}
 };
 

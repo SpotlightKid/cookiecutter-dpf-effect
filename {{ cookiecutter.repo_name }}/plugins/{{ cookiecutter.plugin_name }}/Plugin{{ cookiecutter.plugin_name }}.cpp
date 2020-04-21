@@ -26,8 +26,6 @@
 {%- endif %}
  */
 
-#include <math.h>
-
 #include "Plugin{{ cookiecutter.plugin_name }}.hpp"
 
 START_NAMESPACE_DISTRHO
@@ -37,10 +35,17 @@ START_NAMESPACE_DISTRHO
 Plugin{{ cookiecutter.plugin_name }}::Plugin{{ cookiecutter.plugin_name }}()
     : Plugin(paramCount, presetCount, 0)  // paramCount param(s), presetCount program(s), 0 states
 {
-    sampleRateChanged(getSampleRate());
-    if (presetCount > 0) {
-        loadProgram(0);
+    smooth_gain = new CParamSmooth(20.0f, getSampleRate());
+
+    for (unsigned p = 0; p < paramCount; ++p) {
+        Parameter param;
+        initParameter(p, param);
+        setParameterValue(p, param.ranges.def);
     }
+}
+
+Plugin{{ cookiecutter.plugin_name }}::~Plugin{{ cookiecutter.plugin_name }}() {
+    delete smooth_gain;
 }
 
 // -----------------------------------------------------------------------
@@ -50,19 +55,17 @@ void Plugin{{ cookiecutter.plugin_name }}::initParameter(uint32_t index, Paramet
     if (index >= paramCount)
         return;
 
-    parameter.ranges.min = 0.0f;
-    parameter.ranges.max = 1.0f;
-    parameter.ranges.def = 0.1f;
-    parameter.hints = kParameterIsAutomable | kParameterIsLogarithmic;
+    parameter.ranges.min = -90.0f;
+    parameter.ranges.max = 30.0f;
+    parameter.ranges.def = -0.0f;
+    parameter.unit = "db";
+    parameter.hints = kParameterIsAutomable;
 
     switch (index) {
-        case paramVolumeLeft:
-            parameter.name = "Volume L";
-            parameter.symbol = "volume_l";
-            break;
-        case paramVolumeRight:
-            parameter.name = "Volume R";
-            parameter.symbol = "volume_r";
+        case paramGain:
+            parameter.name = "Gain (dB)";
+            parameter.shortName = "Gain";
+            parameter.symbol = "gain";
             break;
     }
 }
@@ -85,6 +88,7 @@ void Plugin{{ cookiecutter.plugin_name }}::initProgramName(uint32_t index, Strin
 */
 void Plugin{{ cookiecutter.plugin_name }}::sampleRateChanged(double newSampleRate) {
     fSampleRate = newSampleRate;
+    smooth_gain->setSampleRate(newSampleRate);
 }
 
 /**
@@ -101,11 +105,8 @@ void Plugin{{ cookiecutter.plugin_name }}::setParameterValue(uint32_t index, flo
     fParams[index] = value;
 
     switch (index) {
-        case paramVolumeLeft:
-            // do something when volume_r param is set
-            break;
-        case paramVolumeRight:
-            // same for volume_r param
+        case paramGain:
+            gain = DB_CO(CLAMP(fParams[paramGain], -90.0, 30.0));
             break;
     }
 }
@@ -149,8 +150,9 @@ void Plugin{{ cookiecutter.plugin_name }}::run(const float** inputs, float** out
 
     // apply gain against all samples
     for (uint32_t i=0; i < frames; ++i) {
-        outL[i] = inpL[i] * fParams[paramVolumeLeft];
-        outR[i] = inpR[i] * fParams[paramVolumeRight];
+        float gainval = smooth_gain->process(gain);
+        outL[i] = inpL[i] * gainval;
+        outR[i] = inpR[i] * gainval;
     }
 }
 
