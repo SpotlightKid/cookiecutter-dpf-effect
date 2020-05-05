@@ -52,11 +52,8 @@ UI{{ cookiecutter.plugin_name }}::~UI{{ cookiecutter.plugin_name }}() {
 */
 void UI{{ cookiecutter.plugin_name }}::parameterChanged(uint32_t index, float value) {
     switch (index) {
-        case Plugin{{ cookiecutter.plugin_name }}::paramVolumeLeft:
-            // do something when volume_l param is set, such as update a widget
-            break;
-        case Plugin{{ cookiecutter.plugin_name }}::paramVolumeRight:
-            // same for volume_r param
+        case Plugin{{ cookiecutter.plugin_name }}::paramGain:
+            // do something when Gain param is set, such as update a widget
             break;
     }
 
