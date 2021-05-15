@@ -10,9 +10,6 @@ all: libs plugins gen
 
 # --------------------------------------------------------------
 
-submodules:
-	git submodule update --init --recursive
-
 libs:
 {%- if cookiecutter.ui_type != "none" %}
 	$(MAKE) -C dpf/dgl {{ "../build/libdgl-cairo.a" if cookiecutter.ui_type == "cairo" else "../build/libdgl-opengl.a" }}
@@ -56,4 +53,4 @@ install-user: all
 
 # --------------------------------------------------------------
 
-.PHONY: all clean install install-user submodules libs plugins gen
+.PHONY: all clean install install-user libs plugins gen
