@@ -116,10 +116,10 @@ This software was created by *{{ cookiecutter.author_name }}*.
 ## Acknowledgements
 
 This project is built using the DISTRHO Plugin Framework ([DPF]) and set up
-with the [cookiecutter-dpf-faust] project template.
+with the [cookiecutter-dpf-effect] project template.
 
 
-[cookiecutter-dpf-faust]: https://github.com/SpotlightKid/cookiecutter-dpf-faust
+[cookiecutter-dpf-effect]: https://github.com/SpotlightKid/cookiecutter-dpf-effect
 [DPF]: https://github.com/DISTRHO/DPF
 {% if dssi -%}
 [DSSI]: http://dssi.sourceforge.net/
