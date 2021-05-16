@@ -13,11 +13,11 @@ git_url = "git@github.com:{{ cookiecutter.github_username }}/{{ cookiecutter.rep
 
 print("\nRunning post-project-generation hook...\n")
 
-print("Initializing new Git repository:")
+print("Initializing new Git repository...")
 call(['git', 'init'])
-print("Adding Git submodule for DPF library:")
+print("Adding '%s' as Git remote 'origin'." % git_url)
 call(['git', 'remote', 'add', 'origin', git_url])
-print("Checking out submodules:")
+print("Adding Git submodule for DPF library:")
 call(['git', 'submodule', 'add', submodule_url, submodule])
 print("Making initial Git commit:")
 call(['git', 'add', '-A'])
