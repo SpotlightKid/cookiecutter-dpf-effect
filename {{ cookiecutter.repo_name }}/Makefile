@@ -6,6 +6,49 @@
 
 include dpf/Makefile.base.mk
 
+# --------------------------------------------------------------
+# Installation directories
+
+PREFIX ?= /usr/local
+BINDIR ?= $(PREFIX)/bin
+LIBDIR ?= $(PREFIX)/lib
+DSSI_DIR ?= $(LIBDIR)/dssi
+LADSPA_DIR ?= $(LIBDIR)/ladspa
+ifneq ($(MACOS_OR_WINDOWS),true)
+LV2_DIR ?= $(LIBDIR)/lv2
+VST_DIR ?= $(LIBDIR)/vst
+endif
+ifeq ($(MACOS),true)
+LV2_DIR ?= /Library/Audio/Plug-Ins/LV2
+VST_DIR ?= /Library/Audio/Plug-Ins/VST
+endif
+ifeq ($(WINDOWS),true)
+LV2_DIR ?= $(COMMONPROGRAMFILES)/LV2
+VST_DIR ?= $(COMMONPROGRAMFILES)/VST2
+endif
+
+USER_DSSI_DIR ?= $(HOME)/.dssi
+USER_LADSPA_DIR ?= $(HOME)/.ladspa
+ifneq ($(MACOS_OR_WINDOWS),true)
+USER_LV2_DIR ?= $(HOME)/.lv2
+USER_VST_DIR ?= $(HOME)/.vst
+endif
+ifeq ($(MACOS),true)
+USER_LV2_DIR ?= $(HOME)/Library/Audio/Plug-Ins/LV2
+USER_VST_DIR ?= $(HOME)/Library/Audio/Plug-Ins/VST
+endif
+ifeq ($(WINDOWS),true)
+USER_LV2_DIR ?= $(APPDATA)/LV2
+USER_VST_DIR ?= $(APPDATA)/VST
+endif
+
+export DESTDIR PREFIX BINDIR LIBDIR
+export DSSI_DIR LADSPA_DIR LV2_DIR VST_DIR
+export USER_DSSI_DIR USER_LADSPA_DIR USER_LV2_DIR USER_VST_DIR
+
+# --------------------------------------------------------------
+# Targets
+
 all: libs plugins gen
 
 # --------------------------------------------------------------
