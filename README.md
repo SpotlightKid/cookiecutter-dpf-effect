@@ -136,7 +136,7 @@ variables differ depending on the target OS.*
 Requirements
 ------------
 
-* Basic development tools (C++ compiler, make, pkg-config, etc.)
+* Basic development tools (C++ compiler, GNU make, pkg-config, etc.)
 * Python
 * Git
 * [cookiecutter]

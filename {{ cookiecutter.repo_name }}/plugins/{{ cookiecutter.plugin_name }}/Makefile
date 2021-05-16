@@ -37,7 +37,7 @@ FILES_UI = \
 {% if cookiecutter.ui_type != "none" %}
 UI_TYPE = {{ "cairo" if cookiecutter.ui_type == "cairo" else "opengl" }}
 {%- endif %}
-include ../../dpf/Makefile.plugins.mk
+include $(DPF_PATH)/Makefile.plugins.mk
 
 # --------------------------------------------------------------
 # Enable all selected plugin types

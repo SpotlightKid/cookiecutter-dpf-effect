@@ -4,7 +4,28 @@
 # Created by falkTX, Christopher Arndt, and Patrick Desaulniers
 #
 
-include dpf/Makefile.base.mk
+ifeq ($(origin DPF_PATH), undefined)
+    DPF_PATH ::= $(abspath ./dpf)
+endif
+
+export DPF_PATH
+
+# error out if DPF is missing, unless the current rule is 'submodules'
+define MISSING_SUBMODULES_ERROR
+=============================================================================
+DPF library not found (DPF_PATH = $(DPF_PATH)).
+Please run "make submodules" to clone the missing Git submodules, then retry.
+=============================================================================
+endef
+
+ifneq ($(MAKECMDGOALS), submodules)
+ifeq (,$(wildcard $(DPF_PATH)/Makefile.base.mk))
+    $(info $(MISSING_SUBMODULES_ERROR))
+    $(error Unable to continue)
+else
+    include $(DPF_PATH)/Makefile.base.mk
+endif
+endif
 
 # --------------------------------------------------------------
 # Installation directories
@@ -70,36 +91,36 @@ submodules:
 
 libs:
 {%- if cookiecutter.ui_type != "none" %}
-	$(MAKE) -C dpf/dgl {{ "../build/libdgl-cairo.a" if cookiecutter.ui_type == "cairo" else "../build/libdgl-opengl.a" }}
+	$(MAKE) -C $(DPF_PATH)/dgl {{ "../build/libdgl-cairo.a" if cookiecutter.ui_type == "cairo" else "../build/libdgl-opengl.a" }}
 {%- endif %}
 
 plugins: libs
 	$(MAKE) all -C plugins/{{ cookiecutter.plugin_name }}
 
 ifneq ($(CROSS_COMPILING),true)
-gen: plugins dpf/utils/lv2_ttl_generator
-	@$(CURDIR)/dpf/utils/generate-ttl.sh
+gen: plugins $(DPF_PATH)/utils/lv2_ttl_generator
+	@$(DPF_PATH)/utils/generate-ttl.sh
 ifeq ($(MACOS),true)
-	@$(CURDIR)/dpf/utils/generate-vst-bundles.sh
+	@$(DPF_PATH)/utils/generate-vst-bundles.sh
 endif
 
-dpf/utils/lv2_ttl_generator:
-	$(MAKE) -C dpf/utils/lv2-ttl-generator
+$(DPF_PATH)/utils/lv2_ttl_generator:
+	$(MAKE) -C $(DPF_PATH)/utils/lv2-ttl-generator
 else
-gen: plugins dpf/utils/lv2_ttl_generator.exe
-	@$(CURDIR)/dpf/utils/generate-ttl.sh
+gen: plugins $(DPF_PATH)/utils/lv2_ttl_generator.exe
+	@$(DPF_PATH)/utils/generate-ttl.sh
 
-dpf/utils/lv2_ttl_generator.exe:
-	$(MAKE) -C dpf/utils/lv2-ttl-generator WINDOWS=true
+$(DPF_PATH)/utils/lv2_ttl_generator.exe:
+	$(MAKE) -C $(DPF_PATH)/utils/lv2-ttl-generator WINDOWS=true
 endif
 
 # --------------------------------------------------------------
 
 clean:
 {%- if cookiecutter.ui_type != "none" %}
-	$(MAKE) clean -C dpf/dgl
+	$(MAKE) clean -C $(DPF_PATH)/dgl
 {%- endif %}
-	$(MAKE) clean -C dpf/utils/lv2-ttl-generator
+	$(MAKE) clean -C $(DPF_PATH)/utils/lv2-ttl-generator
 	$(MAKE) clean -C plugins/{{ cookiecutter.plugin_name }}
 	rm -rf bin build
 
