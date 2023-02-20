@@ -9,6 +9,7 @@
     "plugin_name": "{{ cookiecutter.project_name|replace(' ', '') }}",
     "repo_name": "{{ cookiecutter.project_name|lower|replace(' ', '') }}",
     "plugin_uri": "https://{{ cookiecutter.domain }}/plugins/{{ cookiecutter.repo_name }}",
+    "plugin_clap_id": "com.github.{{ cookiecutter.github_username }}.{{ cookiecutter.repo_name }}",
     "project_license": "MIT",
     "version": "0.1.0",
     "year": "{% now 'local', '%Y' %}",
