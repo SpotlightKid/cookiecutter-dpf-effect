@@ -14,6 +14,8 @@ NAME = {{ cookiecutter.plugin_name | lower }}
 
 BUILD_LV2 ?= true
 BUILD_VST2 ?= true
+BUILD_VST3 ?= true
+BUILD_CLAP ?= true
 BUILD_JACK ?= true
 BUILD_DSSI ?= false
 BUILD_LADSPA ?= {{ "true" if cookiecutter.ui_type == "none" and
@@ -50,6 +52,14 @@ endif
 
 ifeq ($(BUILD_VST2),true)
 TARGETS += vst
+endif
+
+ifeq ($(BUILD_VST3),true)
+TARGETS += vst3
+endif
+
+ifeq ($(BUILD_CLAP),true)
+TARGETS += clap
 endif
 
 ifeq ($(BUILD_JACK),true)
@@ -93,6 +103,14 @@ ifeq ($(BUILD_VST2),true)
 	@mkdir -p -m755 $(DESTDIR)$(VST_DIR) && \
 	  install -m755 $(TARGET_DIR)/$(NAME)-vst$(LIB_EXT) $(DESTDIR)$(VST_DIR)
 endif
+ifeq ($(BUILD_VST3),true)
+	@mkdir -p -m755 $(DESTDIR)$(VST3_DIR) && \
+	  cp -r $(TARGET_DIR)/$(NAME).vst3 $(DESTDIR)$(VST3_DIR)
+endif
+ifeq ($(BUILD_CLAP),true)
+	@mkdir -p -m755 $(DESTDIR)$(CLAP_DIR) && \
+	  install -m755 $(TARGET_DIR)/$(NAME).clap $(DESTDIR)$(CLAP_DIR)
+endif
 ifeq ($(BUILD_LV2),true)
 	@mkdir -p -m755 $(DESTDIR)$(LV2_DIR)/$(NAME).lv2 && \
 	  install -m755 $(TARGET_DIR)/$(NAME).lv2/*$(LIB_EXT) $(DESTDIR)$(LV2_DIR)/$(NAME).lv2 && \
@@ -123,6 +141,14 @@ endif
 ifeq ($(BUILD_VST2),true)
 	@mkdir -p -m755 $(USER_VST_DIR) && \
 	  install -m755 $(TARGET_DIR)/$(NAME)-vst$(LIB_EXT) $(USER_VST_DIR)
+endif
+ifeq ($(BUILD_VST3),true)
+	@mkdir -p -m755 $(USER_VST3_DIR) && \
+	  cp -r $(TARGET_DIR)/$(NAME).vst3 $(USER_VST3_DIR)
+endif
+ifeq ($(BUILD_CLAP),true)
+	@mkdir -p -m755 $(USER_CLAP_DIR) && \
+	  install -m755 $(TARGET_DIR)/$(NAME).clap $(USER_CLAP_DIR)
 endif
 ifeq ($(BUILD_LV2),true)
 	@mkdir -p -m755 $(USER_LV2_DIR)/$(NAME).lv2 && \
