@@ -59,7 +59,7 @@ void Plugin{{ cookiecutter.plugin_name }}::initParameter(uint32_t index, Paramet
     parameter.ranges.max = 30.0f;
     parameter.ranges.def = -0.0f;
     parameter.unit = "db";
-    parameter.hints = kParameterIsAutomable;
+    parameter.hints = kParameterIsAutomatable;
 
     switch (index) {
         case paramGain:
