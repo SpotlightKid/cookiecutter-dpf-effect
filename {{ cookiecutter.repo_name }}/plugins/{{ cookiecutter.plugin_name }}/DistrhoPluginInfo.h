@@ -46,7 +46,7 @@
 #define DISTRHO_PLUGIN_WANT_MIDI_OUTPUT {{ 0 if cookiecutter.want_midi_output == "no" else 1 }}
 
 #define DISTRHO_PLUGIN_LV2_CATEGORY "lv2:AmplifierPlugin"
-#define DISTRHO_PLUGIN_VST3_CATEGORIES "Fx|Stereo"
-#define DISTRHO_PLUGIN_CLAP_FEATURES "audio-effect", "stereo"
+#define DISTRHO_PLUGIN_VST3_CATEGORIES "Fx|Tools|Stereo"
+#define DISTRHO_PLUGIN_CLAP_FEATURES "audio-effect", "utility", "stereo"
 
 #endif // DISTRHO_PLUGIN_INFO_H
