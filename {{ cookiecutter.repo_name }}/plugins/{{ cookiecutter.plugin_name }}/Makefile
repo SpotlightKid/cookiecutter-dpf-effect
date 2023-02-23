@@ -51,7 +51,7 @@ endif
 endif
 
 ifeq ($(BUILD_VST2),true)
-TARGETS += vst
+TARGETS += vst2
 endif
 
 ifeq ($(BUILD_VST3),true)
