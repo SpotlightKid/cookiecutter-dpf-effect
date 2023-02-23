@@ -100,8 +100,8 @@ ifeq ($(BUILD_LADSPA),true)
 	  install -m755 $(TARGET_DIR)/$(NAME)-ladspa$(LIB_EXT) $(DESTDIR)$(LADSPA_DIR)
 endif
 ifeq ($(BUILD_VST2),true)
-	@mkdir -p -m755 $(DESTDIR)$(VST_DIR) && \
-	  install -m755 $(TARGET_DIR)/$(NAME)-vst$(LIB_EXT) $(DESTDIR)$(VST_DIR)
+	@mkdir -p -m755 $(DESTDIR)$(VST2_DIR) && \
+	  install -m755 $(TARGET_DIR)/$(NAME)-vst$(LIB_EXT) $(DESTDIR)$(VST2_DIR)
 endif
 ifeq ($(BUILD_VST3),true)
 	@mkdir -p -m755 $(DESTDIR)$(VST3_DIR) && \
@@ -139,8 +139,8 @@ ifeq ($(BUILD_LADSPA),true)
 	  install -m755 $(TARGET_DIR)/$(NAME)-ladspa$(LIB_EXT) $(USER_LADSPA_DIR)
 endif
 ifeq ($(BUILD_VST2),true)
-	@mkdir -p -m755 $(USER_VST_DIR) && \
-	  install -m755 $(TARGET_DIR)/$(NAME)-vst$(LIB_EXT) $(USER_VST_DIR)
+	@mkdir -p -m755 $(USER_VST2_DIR) && \
+	  install -m755 $(TARGET_DIR)/$(NAME)-vst$(LIB_EXT) $(USER_VST2_DIR)
 endif
 ifeq ($(BUILD_VST3),true)
 	@mkdir -p -m755 $(USER_VST3_DIR) && \

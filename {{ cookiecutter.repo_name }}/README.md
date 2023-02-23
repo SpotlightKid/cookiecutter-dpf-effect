@@ -63,12 +63,12 @@ dedicated makefile variable.
 * LADSPA: `LADSPA_DIR` (`<prefix>/lib/ladspa`)
 {%- endif -%}
 * LV2: `LV2_DIR` (`<prefix>/lib/lv2`)
-* VST2: `VST_DIR` (`<prefix>/lib/vst`)
+* VST2: `VST2_DIR` (`<prefix>/lib/vst`)
 
 Example:
 
 ```con
-make DESTDIR=/tmp/build-root PREFIX=/usr VST_DIR=/usr/lib/lxvst install
+make DESTDIR=/tmp/build-root PREFIX=/usr VST2_DIR=/usr/lib/lxvst install
 ```
 
 To install the plugins only for your current user account, run:
@@ -87,7 +87,7 @@ a dedicated makefile variable.
 * LADSPA: `USER_LADSPA_DIR` (`$HOME/.ladspa`)
 {%- endif -%}
 * LV2: `USER_LV2_DIR` (`$HOME/.lv2`)
-* VST2: `USER_VST_DIR` (`$HOME/.vst`)
+* VST2: `USER_VST2_DIR` (`$HOME/.vst`)
 
 *Note: The given default values for all of the above listed environment
 variables differ depending on the target OS.*
