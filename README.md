@@ -109,6 +109,8 @@ dedicated makefile variable.
 * LADSPA: `LADSPA_DIR` (`<prefix>/lib/ladspa`)
 * LV2: `LV2_DIR` (`<prefix>/lib/lv2`)
 * VST2: `VST2_DIR` (`<prefix>/lib/vst`)
+* VST3: `VST3_DIR` (`<prefix/lib/vst3`)
+* CLAP: `CLAP_DIR` (`<prefix>/lib/clap`)
 * Stand-alone JACK client program: `BINDIR` (`<prefix>/bin`)
 
 Example: `make DESTDIR=/tmp/build-root VST2_DIR=/usr/lib/lxvst install`
@@ -123,6 +125,8 @@ a dedicated makefile variable.
 * LADSPA: `USER_LADSPA_DIR` (`$HOME/.ladspa`)
 * LV2: `USER_LV2_DIR` (`$HOME/.lv2`)
 * VST2: `USER_VST2_DIR` (`$HOME/.vst`)
+* VST3: `USER_VST3_DIR` (`$HOME/.vst3`)
+* CLAP: `USER_CLAP_DIR` (`$HOME/.clap`)
 * Stand-alone JACK client program: `<none>` (`$HOME/bin`)
 
 *Note: The given default values for all of the above listed environment
