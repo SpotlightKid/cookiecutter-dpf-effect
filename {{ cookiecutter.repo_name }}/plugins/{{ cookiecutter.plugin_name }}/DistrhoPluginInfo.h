@@ -32,6 +32,7 @@
 #define DISTRHO_PLUGIN_BRAND "{{ cookiecutter.plugin_brand }}"
 #define DISTRHO_PLUGIN_NAME  "{{ cookiecutter.plugin_name }}"
 #define DISTRHO_PLUGIN_URI   "{{ cookiecutter.plugin_uri }}"
+#define DISTRHO_PLUGIN_CLAP_ID "{{ cookiecutter.plugin_clap_id }}"
 
 #define DISTRHO_PLUGIN_HAS_UI        {{ 0 if cookiecutter.ui_type == "none" else 1 }}
 #define DISTRHO_UI_USE_NANOVG        {{ 1 if cookiecutter.ui_type == "nanovg" else 0 }}
@@ -43,5 +44,9 @@
 #define DISTRHO_PLUGIN_WANT_PROGRAMS    1
 #define DISTRHO_PLUGIN_WANT_MIDI_INPUT  {{ 0 if cookiecutter.want_midi_input == "no" else 1 }}
 #define DISTRHO_PLUGIN_WANT_MIDI_OUTPUT {{ 0 if cookiecutter.want_midi_output == "no" else 1 }}
+
+#define DISTRHO_PLUGIN_LV2_CATEGORY "lv2:AmplifierPlugin"
+#define DISTRHO_PLUGIN_VST3_CATEGORIES "Fx|Tools|Stereo"
+#define DISTRHO_PLUGIN_CLAP_FEATURES "audio-effect", "utility", "stereo"
 
 #endif // DISTRHO_PLUGIN_INFO_H

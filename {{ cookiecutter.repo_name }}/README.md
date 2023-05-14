@@ -18,6 +18,8 @@ All plugins in this collection come in the following plug-in formats:
 {%- endif -%}
 * [LV2]
 * [VST2]
+* [VST3]
+* [CLAP]
 
 {% if cookiecutter.ui_type == "none" -%}
 The plugins depend on the host to provide a generic UI to control parameters.
@@ -63,12 +65,14 @@ dedicated makefile variable.
 * LADSPA: `LADSPA_DIR` (`<prefix>/lib/ladspa`)
 {%- endif -%}
 * LV2: `LV2_DIR` (`<prefix>/lib/lv2`)
-* VST2: `VST_DIR` (`<prefix>/lib/vst`)
+* VST2: `VST2_DIR` (`<prefix>/lib/vst`)
+* VST3: `VST3_DIR` (`<prefix>/lib/vst3`)
+* CLAP: `CLAP_DIR` (`<prefix>/lib/clap`)
 
 Example:
 
 ```con
-make DESTDIR=/tmp/build-root PREFIX=/usr VST_DIR=/usr/lib/lxvst install
+make DESTDIR=/tmp/build-root PREFIX=/usr VST2_DIR=/usr/lib/lxvst install
 ```
 
 To install the plugins only for your current user account, run:
@@ -87,7 +91,9 @@ a dedicated makefile variable.
 * LADSPA: `USER_LADSPA_DIR` (`$HOME/.ladspa`)
 {%- endif -%}
 * LV2: `USER_LV2_DIR` (`$HOME/.lv2`)
-* VST2: `USER_VST_DIR` (`$HOME/.vst`)
+* VST2: `USER_VST2_DIR` (`$HOME/.vst`)
+* VST3: `USER_VST3_DIR` (`$HOME/.vst3`)
+* CLAP: `USER_CLAP_DIR` (`$HOME/.clap`)
 
 *Note: The given default values for all of the above listed environment
 variables differ depending on the target OS.*
@@ -129,4 +135,5 @@ with the [cookiecutter-dpf-effect] project template.
 {%- endif -%}
 [LV2]: http://lv2plug.in/
 [pkgconf]: https://github.com/pkgconf/pkgconf
-[VST2]: https://en.wikipedia.org/wiki/Virtual_Studio_Technology
+[VST2/3]: https://en.wikipedia.org/wiki/Virtual_Studio_Technology
+[CLAP]: https://cleveraudio.org/

@@ -135,14 +135,6 @@ bool UI{{ cookiecutter.plugin_name }}::onKeyboard(const KeyboardEvent& ev) {
 }
 
 /**
-  A function called when a special key is pressed or released.
-*/
-bool UI{{ cookiecutter.plugin_name }}::onSpecial(const SpecialEvent& ev) {
-    return false;
-    (void)ev;
-}
-
-/**
   A function called when a mouse button is pressed or released.
 */
 bool UI{{ cookiecutter.plugin_name }}::onMouse(const MouseEvent& ev) {
