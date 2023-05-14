@@ -4,7 +4,22 @@
 # Created by falkTX, Christopher Arndt, and Patrick Desaulniers
 #
 
-include dpf/Makefile.base.mk
+# error out if DPF is missing, unless the current rule is 'submodules'
+define MISSING_SUBMODULES_ERROR
+=============================================================================
+DPF library not found in directory 'dpf'.
+Please run "make submodules" to clone the missing Git submodules, then retry.
+=============================================================================
+endef
+
+ifneq ($(MAKECMDGOALS), submodules)
+ifeq (,$(wildcard dpf/Makefile.base.mk))
+    $(info $(MISSING_SUBMODULES_ERROR))
+    $(error Unable to continue)
+else
+    include dpf/Makefile.base.mk
+endif
+endif
 
 # --------------------------------------------------------------
 # Installation directories
@@ -78,16 +93,16 @@ plugins: libs
 
 ifneq ($(CROSS_COMPILING),true)
 gen: plugins dpf/utils/lv2_ttl_generator
-	@$(CURDIR)/dpf/utils/generate-ttl.sh
+	@dpf/utils/generate-ttl.sh
 ifeq ($(MACOS),true)
-	@$(CURDIR)/dpf/utils/generate-vst-bundles.sh
+	@dpf/utils/generate-vst-bundles.sh
 endif
 
 dpf/utils/lv2_ttl_generator:
 	$(MAKE) -C dpf/utils/lv2-ttl-generator
 else
 gen: plugins dpf/utils/lv2_ttl_generator.exe
-	@$(CURDIR)/dpf/utils/generate-ttl.sh
+	@dpf/utils/generate-ttl.sh
 
 dpf/utils/lv2_ttl_generator.exe:
 	$(MAKE) -C dpf/utils/lv2-ttl-generator WINDOWS=true
