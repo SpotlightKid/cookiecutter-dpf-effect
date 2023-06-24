@@ -160,7 +160,7 @@ Authors
 Licensing
 ---------
 
-Unless otherwise noted all files in this template are published under the
+Unless otherwise noted, all files in this template are published under the
 MIT License.
 
 The Makefile templates are based on the Makefiles provided with the DPF example
